@@ -1,11 +1,30 @@
 <template>
     <div class="reading-habit">
+        <div class="header">
+            <h1>阅读习惯设置</h1>
+        </div>
         <el-form ref="form" :model="form" label-width="120px">
-            <el-form-item label="Name">
-                <el-input v-model="form.name"></el-input>
+            <el-form-item label="喜欢的阅读方式" class="item">
+                <el-select v-model="form.readingMethod" placeholder="请选择">
+                    <el-option label="纸质书" value="paper"></el-option>
+                    <el-option label="电子书" value="ebook"></el-option>
+                    <el-option label="有声书" value="audiobook"></el-option>
+                </el-select>
             </el-form-item>
-            <el-form-item label="Email">
-                <el-input v-model="form.email"></el-input>
+            <el-form-item label="每次阅读的时长" class="item">
+                    <el-select v-model="form.readingDuration" placeholder="请选择">
+                        <el-option label="3分钟以下" value="very short"></el-option>
+                        <el-option label="3-10分钟" value="short"></el-option>
+                        <el-option label="10分钟以上" value="medium"></el-option>
+                        <el-option label="10-30分钟" value="long"></el-option>
+                        <el-option label="能够长时间阅读" value="very long"></el-option>
+                    </el-select>
+            </el-form-item>
+            <el-form-item label="是否喜欢重复" class="item">
+                <el-switch v-model="form.repeatedReading"></el-switch>
+            </el-form-item>
+            <el-form-item label="其他阅读习惯" class="item">
+                <el-input type="textarea" v-model="form.otherHabits"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="submitForm">Submit</el-button>
@@ -19,28 +38,36 @@ export default {
     data() {
         return {
             form: {
-                name: '',
-                email: ''
+                readingMethod: '',
+                readingDuration: '',
+                repeatedReading: false,
+                otherHabits: ''
             }
         };
     },
     methods: {
         submitForm() {
-            this.$refs.form.validate((valid) => {
-                if (valid) {
-                    // Form is valid, perform form submission logic here
-                    console.log('Form submitted');
-                } else {
-                    // Form is invalid, handle validation errors here
-                    console.log('Form validation failed');
-                }
-            });
+            // Handle form submission
         }
     }
-};
+}
 </script>
 
-<style>
-/* Add your custom styles here */
+<style scoped>
+.reading-habit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Courier New", Courier, monospace;
+    position: relative;
+}
 
+.item{
+    width: 35vw;
+}
+
+.header {
+    font: bold 24px "Courier New", Courier, monospace;
+  }
 </style>

@@ -7,14 +7,14 @@
     <el-form class="form" ref="form" :model="basicInfoData" label-width="120px">
       <!-- 年龄 -->
       <el-form-item label="年龄" class="form-item">
-        <el-input v-model="basicInfoData.age"></el-input>
+        <el-input-number v-model="basicInfoData.age"></el-input-number>
       </el-form-item>
 
       <!-- 性别 -->
       <el-form-item label="性别" class="form-item">
         <el-select v-model="basicInfoData" placeholder="请选择性别">
-          <el-option label="男">男</el-option>
-          <el-option label="女">女</el-option>
+          <el-option value="男">男</el-option>
+          <el-option value="女">女</el-option>
         </el-select>
       </el-form-item>
 
@@ -42,10 +42,10 @@
       <!-- 感官偏好 -->
       <el-form-item label="感官偏好" class="form-item">
         <el-checkbox-group v-model="basicInfoData.sensory">
-          <el-checkbox label="听觉"></el-checkbox>
-          <el-checkbox label="视觉"></el-checkbox>
-          <el-checkbox label="触觉"></el-checkbox>
-          <el-checkbox label="味觉"></el-checkbox>
+          <el-checkbox value="听觉">听觉</el-checkbox>
+          <el-checkbox value="视觉">视觉</el-checkbox>
+          <el-checkbox value="触觉">触觉</el-checkbox>
+          <el-checkbox value="味觉">味觉</el-checkbox>
         </el-checkbox-group>
       </el-form-item>
 
@@ -53,6 +53,7 @@
       <el-form-item label="尽量避免的描述" class="form-item">
         <el-input
           type="textarea"
+          placeholder="请输入尽量避免的描述，如触发不良情绪的词汇、儿童本人害怕的动物等"
           v-model="basicInfoData.description"
         ></el-input>
       </el-form-item>
@@ -68,7 +69,6 @@
       v-model="dialogVisible"
       title="语言能力参考"
       width="500"
-      :before-close="handleClose"
     >
       关于自闭症患者的语言能力，可以参考以下几个阶段的分类。注意，以下分类不具有诊断级别的准确性，仅供参考。<br />
       <ul>
@@ -117,6 +117,8 @@
 </template>
 
 <script>
+import {ElMessage} from 'element-plus';
+
 import { QuestionFilled } from "@element-plus/icons-vue";
 
 export default {
@@ -126,7 +128,7 @@ export default {
   data() {
     return {
       basicInfoData: {
-        age: "",
+        age: 7,
         language: "",
         sex: "",
         sensory: [],
@@ -150,10 +152,14 @@ export default {
   methods: {
     submitForm() {
       // Handle form submission
+      ElMessage({
+        message: "保存成功",
+        type: "success",
+      });
+      console.log(this.basicInfoData);
     },
     openLan() {
       this.dialogVisible = true;
-      console.log("open language help");
     },
   },
 };
@@ -177,7 +183,6 @@ export default {
 }
 
 .header {
-  margin-left: 20%;
   font: bold 24px "Courier New", Courier, monospace;
 }
 
@@ -194,6 +199,6 @@ export default {
   transform: translateY(-50%);
 }
 .form-item {
-    width: 100%;
+    width: 35vw;
 }
 </style>
