@@ -14,31 +14,27 @@
         <!-- 用户设置表单按钮 -->
         <div class="setting-buttons">
           <el-button
-            :disabled="!isSettingBasicInfo"
             class="setting-btn"
-            type="primary"
+            :type="isSettingBasicInfo ? 'primary' : 'default'"
             @click="settingBasicInfo()"
             >基本信息</el-button
           >
           <el-button
-            :disabled="!isSettingInterest"
+            :type="isSettingInterest ? 'primary' : 'default'"
             class="setting-btn"
-            type="primary"
-            @click="basicInfo"
+            @click="settingInterest()"
             >兴趣设置</el-button
           >
           <el-button
-            :disabled="!isSettingReadingHabit"
             class="setting-btn"
-            type="primary"
-            @click="basicInfo"
+            :type= "isSettingReadingHabit ? 'primary' : 'default'"
+            @click="settingReadingHabit()"
             >阅读习惯</el-button
           >
           <el-button
-            :disabled="!isSettingExpectation"
             class="setting-btn"
-            type="primary"
-            @click="basicInfo"
+            :type="isSettingExpectation ? 'primary' : 'default'"
+            @click="settingExpectation()"
             >期望</el-button
           >
         </div>
@@ -87,6 +83,24 @@ export default {
       this.isSettingReadingHabit = false;
       this.isSettingExpectation = false;
     },
+    settingInterest() {
+      this.isSettingBasicInfo = false;
+      this.isSettingInterest = true;
+      this.isSettingReadingHabit = false;
+      this.isSettingExpectation = false;
+    },
+    settingReadingHabit() {
+      this.isSettingBasicInfo = false;
+      this.isSettingInterest = false;
+      this.isSettingReadingHabit = true;
+      this.isSettingExpectation = false;
+    },
+    settingExpectation() {
+      this.isSettingBasicInfo = false;
+      this.isSettingInterest = false;
+      this.isSettingReadingHabit = false;
+      this.isSettingExpectation = true;
+    },
   },
   mounted() {
     // Code to run when the component is mounted
@@ -122,7 +136,7 @@ export default {
 .setting-buttons {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 10%;
 }
 
 .setting-btn {
@@ -131,13 +145,17 @@ export default {
   padding: 0;
   margin-top: 10px;
 }
+
 .setting-buttons button:first-child {
   margin-left: 5%;
   padding-left: 0;
 }
 .setting-forms {
   display: flex;
+  flex-direction: column;
+  align-content: center;
   margin-left: 10px;
   height: 500px;
+  width:60%;
 }
 </style>

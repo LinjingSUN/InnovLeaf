@@ -2,6 +2,9 @@
     <div>
         <el-form ref="form" :model="formData" label-width="120px">
             <!-- Form fields go here -->
+            <el-form-item>
+                <el-button type="primary" @click="submitForm">Submit</el-button>
+            </el-form-item>
         </el-form>
     </div>
 </template>

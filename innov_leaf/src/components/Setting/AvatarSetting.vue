@@ -106,7 +106,6 @@ export default {
 
 <style scoped>
 .avatar-setting {
-  margin-top: -8vh;
   font-family: 'Courier New', Courier, monospace;
   display: flex;
   flex-direction: column;
@@ -118,8 +117,8 @@ export default {
 }
 
 .avatar {
-  width: 250px;
-  height: 400px;
+  width: 15vw;
+  height: 40vh;
 }
 
 .bottom{

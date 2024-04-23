@@ -4,13 +4,22 @@
       <h1>基本信息</h1>
     </div>
 
-    <el-form ref="form" :model="basicInfoData" label-width="120px">
-      <el-form-item label="年龄">
+    <el-form class="form" ref="form" :model="basicInfoData" label-width="120px">
+      <!-- 年龄 -->
+      <el-form-item label="年龄" class="form-item">
         <el-input v-model="basicInfoData.age"></el-input>
       </el-form-item>
 
+      <!-- 性别 -->
+      <el-form-item label="性别" class="form-item">
+        <el-select v-model="basicInfoData" placeholder="请选择性别">
+          <el-option label="男">男</el-option>
+          <el-option label="女">女</el-option>
+        </el-select>
+      </el-form-item>
+
       <!-- 语言能力 -->
-      <el-form-item label="语言能力" class="item">
+      <el-form-item label="语言能力" class="form-item">
         <div class="select-with-icon">
           <el-select
             v-model="basicInfoData.language"
@@ -30,10 +39,8 @@
         </div>
       </el-form-item>
 
-     
-
       <!-- 感官偏好 -->
-      <el-form-item label="感官偏好">
+      <el-form-item label="感官偏好" class="form-item">
         <el-checkbox-group v-model="basicInfoData.sensory">
           <el-checkbox label="听觉"></el-checkbox>
           <el-checkbox label="视觉"></el-checkbox>
@@ -43,7 +50,7 @@
       </el-form-item>
 
       <!-- 尽量避免的描述 -->
-      <el-form-item label="尽量避免的描述">
+      <el-form-item label="尽量避免的描述" class="form-item">
         <el-input
           type="textarea"
           v-model="basicInfoData.description"
@@ -100,7 +107,9 @@
       </ul>
       <template #footer>
         <div class="dialog-footer">
-          <el-button @click="dialogVisible = false" type="success">了解了！</el-button>
+          <el-button @click="dialogVisible = false" type="success"
+            >了解了！</el-button
+          >
         </div>
       </template>
     </el-dialog>
@@ -119,6 +128,7 @@ export default {
       basicInfoData: {
         age: "",
         language: "",
+        sex: "",
         sensory: [],
         description: "",
       },
@@ -150,6 +160,13 @@ export default {
 </script>
 
 <style scoped>
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .basic-info {
   display: flex;
   flex-direction: column;
@@ -160,9 +177,7 @@ export default {
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  margin-left: 25%;
+  margin-left: 20%;
   font: bold 24px "Courier New", Courier, monospace;
 }
 
@@ -177,5 +192,8 @@ export default {
   font-size: 20px;
   top: 50%;
   transform: translateY(-50%);
+}
+.form-item {
+    width: 100%;
 }
 </style>

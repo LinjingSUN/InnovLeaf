@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="reading-habit">
         <el-form ref="form" :model="form" label-width="120px">
             <el-form-item label="Name">
                 <el-input v-model="form.name"></el-input>
@@ -42,4 +42,5 @@ export default {
 
 <style>
 /* Add your custom styles here */
+
 </style>
