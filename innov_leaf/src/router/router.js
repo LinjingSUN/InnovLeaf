@@ -1,6 +1,6 @@
 // src/router.js
 import HelloWorld from '@/components/HelloWorld.vue'
-import UserSetting from '@/views/UserSetting.vue'
+import UserSetting from '@/views/SettingPage.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 

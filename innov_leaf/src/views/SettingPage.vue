@@ -158,4 +158,6 @@ export default {
   height: 500px;
   width:60%;
 }
+
+
 </style>

@@ -55,8 +55,8 @@
           placeholder="或许ta对数学、运动、棋艺等等感兴趣吗？"
         ></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="saveInterest">Save</el-button>
+      <el-form-item class="btn">
+        <el-button type="primary" @click="saveInterest">确认</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -112,5 +112,13 @@ export default {
 .item {
   margin-bottom: 10px;
   width: 100%;
+
+}
+
+.btn{
+    position: absolute;
+    bottom: -10%;
+    right: 50%;
+    transform: translateX(50%);
 }
 </style>
