@@ -100,7 +100,7 @@ export default {
       this.userProfile.nickname = this.originalNickname;
       this.isEditing = false;
     },
-  },
+  }
 };
 </script>
 
