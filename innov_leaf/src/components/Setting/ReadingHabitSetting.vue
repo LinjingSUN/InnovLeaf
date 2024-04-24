@@ -3,16 +3,16 @@
     <div class="header">
       <h1>阅读习惯设置</h1>
     </div>
-    <el-form ref="form" :model="form" label-width="120px">
+    <el-form ref="form" :model="readingData" label-width="120px">
       <el-form-item label="喜欢的阅读方式" class="item">
-        <el-select v-model="form.readingMethod" placeholder="请选择">
-          <el-option label="纸质书" value="paper"></el-option>
-          <el-option label="电子书" value="ebook"></el-option>
-          <el-option label="有声书" value="audiobook"></el-option>
+        <el-select v-model="readingData.readingMethod" placeholder="请选择">
+          <el-option label="自行阅读" value="paper"></el-option>
+          <el-option label="听书" value="ebook"></el-option>
+          <el-option label="家长陪同阅读" value="audiobook"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="每次阅读的时长" class="item">
-        <el-select v-model="form.readingDuration" placeholder="请选择">
+        <el-select v-model="readingData.readingDuration" placeholder="请选择">
           <el-option label="3分钟以下" value="very short"></el-option>
           <el-option label="3-10分钟" value="short"></el-option>
           <el-option label="10分钟以上" value="medium"></el-option>
@@ -21,10 +21,10 @@
         </el-select>
       </el-form-item>
       <el-form-item label="是否喜欢重复" class="item">
-        <el-switch v-model="form.repeatedReading"></el-switch>
+        <el-switch v-model="readingData.repeatedReading"></el-switch>
       </el-form-item>
       <el-form-item label="其他阅读习惯" class="item">
-        <el-input type="textarea" v-model="form.otherHabits"></el-input>
+        <el-input type="textarea" v-model="readingData.otherHabits"></el-input>
       </el-form-item>
       <el-form-item class="btn">
         <el-button type="primary" @click="submitForm">确认</el-button>
@@ -35,10 +35,13 @@
 
 <script>
 import { ElMessage } from "element-plus";
+import { useStore } from "@/store/index.js";
+import axios from "axios";
+
 export default {
   data() {
     return {
-      form: {
+      readingData: {
         readingMethod: "",
         readingDuration: "",
         repeatedReading: false,
@@ -46,13 +49,36 @@ export default {
       },
     };
   },
+
+  // 在页面渲染之前获取pinia store中的数据
+  created() {
+    const store = useStore();
+    this.readingData = store.$state.readingData;
+  },
+
   methods: {
     submitForm() {
-      ElMessage({
-        message: "保存成功",
-        type: "success",
+      const store = useStore();
+      store.$patch({
+        readingData: this.readingData,
       });
-      console.log(this.form);
+      
+      axios
+        .post("http://127.0.0.1:5000/user", this.readingData)
+        .then((response) => {
+          if (response.status === 200) {
+            ElMessage({
+              message: "保存成功",
+              type: "success",
+            });
+          }
+          else {
+            ElMessage({
+              message: "保存失败",
+              type: "error",
+            });
+          }
+        });
     },
   },
 };

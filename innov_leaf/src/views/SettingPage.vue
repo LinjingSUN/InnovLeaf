@@ -57,6 +57,7 @@ import InterestSetting from "../components/Setting/InterestSetting.vue";
 import ReadingHabitSetting from "../components/Setting/ReadingHabitSetting.vue";
 import ExpectationSetting from "../components/Setting/ExpectionSetting.vue";
 
+
 export default {
   components: {
     AvatarSetting,
@@ -75,8 +76,12 @@ export default {
       isSettingExpectation: false,
     };
   },
+  // before create, request data from the serve
+
+  
   methods: {
-    // Your methods go here
+   
+
     settingBasicInfo() {
       this.isSettingBasicInfo = true;
       this.isSettingInterest = false;

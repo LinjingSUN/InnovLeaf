@@ -3,15 +3,15 @@
     <div class="header">
       <h1>家长期望设置</h1>
     </div>
-    <el-form ref="form" :model="formData" label-width="120px" label-position="top">
+    <el-form ref="form" :model="expectionData" label-width="120px" label-position="top">
       <el-form-item label="希望通过阅读故事达到什么目标:" class="item">
-        <el-input v-model="formData.readingGoal"></el-input>
+        <el-input v-model="expectionData.readingGoal"></el-input>
       </el-form-item>
       <el-form-item label="希望故事能够帮助孩子在哪些方面取得进步:" class="item">
-        <el-input v-model="formData.improvementAreas" ></el-input>
+        <el-input v-model="expectionData.improvementAreas" ></el-input>
       </el-form-item>
       <el-form-item label="对故事内容有什么特别要求:" class="item">
-        <el-input v-model="formData.storyRequirements"></el-input>
+        <el-input v-model="expectionData.storyRequirements"></el-input>
       </el-form-item>
       <el-form-item class="btn">
         <el-button type="primary" @click="submitForm">确认</el-button>
@@ -22,25 +22,64 @@
 
 <script>
 import { ElMessage } from "element-plus";
-
+import { useStore } from "@/store/index.js";
+import axios from "axios";
 export default {
   data() {
     return {
-      formData: {
+      expectionData: {
         readingGoal: "",
         improvementAreas: "",
         storyRequirements: "",
       },
     };
   },
+
+  // 在页面渲染之前获取pinia store中的数据
+  created() {
+    const store = useStore();
+    this.expectionData = store.$state.expectionData;
+  },
+
   methods: {
     submitForm() {
-      ElMessage({
-        message: "保存成功",
-        type: "success",
-      });
+      try  {
+        const store = useStore();
+        store.$patch({
+          expectionData: this.expectionData,
+        });
+
+        ElMessage({
+          message: "保存成功",
+          type: "success",
+        });
+        // Handle form submission
+        //console.log(this.expectionData);
+      } catch (error) {
+        ElMessage({
+          message: "保存失败",
+          type: "error",
+        });
+      }
+
+      axios
+        .post("http://127.0.0.1:5000/user", this.expectionData)
+        .then((response) => {
+          if (response.status === 200) {
+            ElMessage({
+              message: "保存成功",
+              type: "success",
+            });
+          }
+          else {
+            ElMessage({
+              message: "保存失败",
+              type: "error",
+            });
+          }
+        });
       // Handle form submission
-      console.log(this.formData);
+      //console.log(this.expectionData);
     },
   },
 };

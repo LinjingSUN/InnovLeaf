@@ -14,6 +14,11 @@ const routes = [
         path: '/setting',
         name: 'UserSetting',
         component: UserSetting
+    },
+    { 
+        path: '/reading', 
+        name: 'Reading',
+        component: () => import('@/views/ReadingPage.vue')
     }
 ]
 

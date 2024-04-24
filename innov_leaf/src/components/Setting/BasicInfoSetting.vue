@@ -33,7 +33,7 @@
             >
             </el-option>
           </el-select>
-          <el-button type="text" @click="openLan()" class="select-icon">
+          <el-button link @click="openLan()" class="select-icon">
             <el-icon><QuestionFilled /></el-icon>
           </el-button>
         </div>
@@ -65,11 +65,7 @@
     </el-form>
 
     <!-- 弹窗 -->
-    <el-dialog
-      v-model="dialogVisible"
-      title="语言能力参考"
-      width="500"
-    >
+    <el-dialog v-model="dialogVisible" title="语言能力参考" width="500">
       关于自闭症患者的语言能力，可以参考以下几个阶段的分类。注意，以下分类不具有诊断级别的准确性，仅供参考。<br />
       <ul>
         <li>
@@ -117,9 +113,10 @@
 </template>
 
 <script>
-import {ElMessage} from 'element-plus';
-
+import { ElMessage } from "element-plus";
+import { useStore } from "@/store/index.js";
 import { QuestionFilled } from "@element-plus/icons-vue";
+import axios from "axios";
 
 export default {
   components: {
@@ -149,14 +146,42 @@ export default {
     };
   },
 
+  // 在页面渲染之前获取pinia store中的数据
+  created() {
+    const store = useStore();
+    this.basicInfoData = store.$state.basicInfoData;
+  },
+
   methods: {
     submitForm() {
       // Handle form submission
-      ElMessage({
-        message: "保存成功",
-        type: "success",
-      });
-      console.log(this.basicInfoData);
+      const store = useStore();
+      try {
+        store.$patch({
+          basicInfoData: this.basicInfoData,
+        });
+      } catch (error) {
+        ElMessage({
+          message: "保存失败",
+          type: "error",
+        });
+      }
+
+      axios
+        .post("http://127.0.0.1:5000/user", this.userProfile)
+        .then((response) => {
+          if (response.status === 200) {
+            ElMessage({
+              message: "保存成功",
+              type: "success",
+            });
+          } else {
+            ElMessage({
+              message: "保存失败",
+              type: "error",
+            });
+          }
+        });
     },
     openLan() {
       this.dialogVisible = true;
@@ -199,6 +224,6 @@ export default {
   transform: translateY(-50%);
 }
 .form-item {
-    width: 35vw;
+  width: 35vw;
 }
 </style>
