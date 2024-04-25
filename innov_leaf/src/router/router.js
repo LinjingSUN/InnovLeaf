@@ -1,6 +1,7 @@
 // src/router.js
 import HelloWorld from '@/components/HelloWorld.vue'
 import UserSetting from '@/views/SettingPage.vue'
+import StoryPreview from '@/views/StoryPreviewPage.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 
@@ -14,6 +15,10 @@ const routes = [
         path: '/setting',
         name: 'UserSetting',
         component: UserSetting
+    }, {
+        path: '/history',
+        name: 'StoryPreview',
+        component: StoryPreview
     },
     { 
         path: '/reading', 
