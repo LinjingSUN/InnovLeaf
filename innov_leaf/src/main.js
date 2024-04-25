@@ -32,6 +32,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 
 
+<<<<<<< HEAD
 app.config.globalProperties.$http = axios
 axios.defaults.baseURL = 'http://127.0.0.1:5000/'
 
@@ -45,5 +46,7 @@ axios.interceptors.request.use(
 )
 
 
+=======
+>>>>>>> fc9ac2973cd0b8e79b2808ce97897e121f36e5a4
 import './global.css'
 createApp(App).use(router).use(createPinia()).use(ElementPlus).use(vuetify).mount('#app')

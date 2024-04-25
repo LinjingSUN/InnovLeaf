@@ -10,8 +10,5 @@ export const useStore = defineStore({
     expectionData: {},
     interest: {},
     readingData: {},
-
-
-
   }),
 });

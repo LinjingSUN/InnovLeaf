@@ -16,7 +16,8 @@
                         <el-radio-button :label="false">
                             <el-icon><PictureFilled /></el-icon>
                         </el-radio-button>
-                        <el-radio-button :label="true">
+                        <!-- <el-radio-button :label="true"> -->
+                        <el-radio-button :label="false">
                             <el-icon><List /></el-icon>
                         </el-radio-button>
                     </el-radio-group>
