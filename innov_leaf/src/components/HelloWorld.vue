@@ -78,9 +78,9 @@ export default {
           console.log(response.data);
           const store = useStoryState();
           store.$patch({
-            storyList: response.data,
+            storyList: response.data.story,
           });
-          console.log(store.$state.storyList);
+          // console.log(store.$state.storyList);
         } else {
           console.log(response.code);
           ElMessage({

@@ -56,7 +56,8 @@ import BasicInfoSetting from "../components/Setting/BasicInfoSetting.vue";
 import InterestSetting from "../components/Setting/InterestSetting.vue";
 import ReadingHabitSetting from "../components/Setting/ReadingHabitSetting.vue";
 import ExpectationSetting from "../components/Setting/ExpectionSetting.vue";
-
+// import axios from "axios";
+// import { useStore } from "@/store/index.js";
 
 export default {
   components: {

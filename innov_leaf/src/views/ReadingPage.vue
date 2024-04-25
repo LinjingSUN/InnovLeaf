@@ -1,8 +1,5 @@
 <template>
   <div class="reading-page">
-    <div class="image-container">
-      <img :src="image" alt="Image" />
-    </div>
     <div class="text-container">
       <p class="text">Your text goes here</p>
     </div>
@@ -11,14 +8,15 @@
 
 <script>
 // import { useStore } from '@/store/index.js';
-
+import { useStoryState} from "@/store/story.js";
 export default {
   created() {
-   
+   const store = useStoryState();
+   console.log(store.$state.storyList);
   },
   data() {
     return {
-      text: '',
+      storyList: [],
       image:""
     };
   },
@@ -40,14 +38,7 @@ export default {
   background-size: cover;
 }
 
-.image-container {
-  flex: 1;
-}
 
-.text-container {
-  flex: 1;
-  text-align: right;
-}
 
 .text {
   font-size: 24px;
