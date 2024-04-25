@@ -6,7 +6,7 @@ export const useStoryState = defineStore({
   // state: 返回对象的函数
   state: () => ({
       storyList: [],
-      storyName: {},
+      StoryHistory: [],
 
   }),
 });

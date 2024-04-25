@@ -1,9 +1,18 @@
 <template>
   <div class="hello">
-    <h1>Hello World!</h1>
-    <button @click="goView()">Click me to generate the story</button>
-    <br />
-    <button @click="goSetting()">Click me to setting page</button>
+    <img src="@/assets/logo_removed.png" alt="logo" class="logo"/>
+    <span class="slogan">创叶-用科技连接你我，用智能点亮智慧</span>
+    <!-- 在页面中间生成一个大的输入框 -->
+    <el-input
+      type="textarea"
+      :rows="2"
+      placeholder="请输入你想要的故事"
+      v-model="storyPrompt"
+      class="story-input"
+    ></el-input>
+    
+
+    <el-button type="primary" @click="goView()" :class="btn" size="large" :icon="Check">生成新故事！</el-button>
   </div>
 </template>
 
@@ -20,6 +29,7 @@ export default {
   data() {
     return {
       loading: false,
+      storyPrompt: "",
     };
   },
 
@@ -106,4 +116,45 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.hello{
+  font:  24px "Courier New", Courier, monospace;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("@/assets/background.jpg");
+  background-size: cover;
+  position: relative;
+}
+.logo{
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 0vh;
+}
+.slogan{
+  font: italic 18px "Courier New", Courier, monospace;
+  position: absolute;
+  top: 20vh;
+}
+.story-input{
+  width: 60vw;
+  /* 文字居中 */
+  text-align: center;
+  font-size: 24px;
+  margin: 5%;
+  border-radius: 60px;
+}
+
+.el-textarea__inner, .el-input__inner{
+  font-size: 24px;
+  background: rgba(249, 246, 246, 0.8) !important;
+}
+
+.btn{
+  margin-top: 10vh;
+  font-size: 30px;
+}
 </style>

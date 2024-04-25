@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <div class="setting">
-      set
-    </div>
+    <GlobalTab />
   </div>
 </template>
 
 <script>
+import GlobalTab from './components/GlobalTab.vue'
 export default {
+  components: { GlobalTab },
   name: 'App',
 }
 </script>

@@ -4,7 +4,7 @@
         <el-image
             style="width: 500px; height: 300px"
             :src="require('@/assets/' + image.src)"
-            :fit="fit"></el-image>
+            fit="fill"></el-image>
           <div style="text-align: center;position: relative; justify-content: center;">
             <span class="demonstration" >{{image.title}}</span>
           </div>
@@ -15,6 +15,10 @@
   
   
   <script>
+  import axios from 'axios';
+  import { ElMessage } from 'element-plus';
+  import { useStoryState } from '@/store/story.js';
+
   export default {
     data() {
       return {
@@ -22,17 +26,54 @@
         images: [
           // ... array of image objects { id: '', src: '', title: '' }
           { id: 1, src: 'test/1.png', title: '魔法之旅' },
-          { id: 2, src: 'test/2.png', title: '大海的呼唤' },
-          { id: 3, src: 'test/3.png', title: '森林的秘密' },
-          { id: 4, src: 'test/4.png', title: '森林的秘密' },
-          { id: 5, src: 'test/5.png', title: '森林的秘密' },
-          { id: 6, src: 'test/6.png', title: '森林的秘密' }
         ],
-        selectedIndex: 0
+        selectedIndex: 0,
+        historyItems: [],
       };
     },
 
-   
+    created() {
+      axios.get("http://127.0.0.1:5000/storyHistory").then((response) => {
+        if (response.code == null) {
+          console.log(response.data);
+          const store = useStoryState();
+          store.$patch({
+            storyHistory: response.data,
+          });
+          this.historyItems = response.data;
+          this.handleHistoryItems();
+        } else {
+          console.log(response.code);
+          ElMessage({
+            message: "生成失败",
+            type: "error",
+          });
+        }
+      });
+    },
+
+    methods: {
+      handleHistoryItems() {
+       
+        const titles = Object.keys(this.historyItems);
+        for (let i = 0; i < titles.length; i++) {
+          const ob = Object.keys(this.historyItems[titles[i]]);
+          this.images.push({
+            id: i + 2,
+            src: 'test/image.png',
+            title: ob[0],
+          });
+        }
+        // this.images = jsonObj.map((item) => {
+        //   return {
+        //     // id 自增长
+        //     id: this.images.length,
+        //     src: 'test/image.png',
+        //     title: item,
+        //   };
+        // });
+      },
+    },
   };
   </script>
   
