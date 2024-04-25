@@ -19,7 +19,8 @@
     "element-plus": "^2.7.1",
     "pinia": "^2.1.7",
     "vue": "^3.2.13",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "vuetify": "^3.5.17"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
