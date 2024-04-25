@@ -9,7 +9,9 @@ export const useStore = defineStore({
     basicInfoData: {},
     expectionData: {},
     interest: {},
-    readingData: {}
+    readingData: {},
+
+
 
   }),
 });

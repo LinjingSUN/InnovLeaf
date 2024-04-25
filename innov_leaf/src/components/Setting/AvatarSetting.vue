@@ -82,6 +82,7 @@ export default {
           userProfile: this.userProfile,
         });
       } catch (error) {
+        this.userProfile.nickname = this.originalNickname;
         ElMessage({
           message: "保存失败",
           type: "error",
@@ -98,6 +99,7 @@ export default {
             });
           }
           else {
+            this.userProfile.nickname = this.originalNickname;
             ElMessage({
               message: "保存失败",
               type: "error",

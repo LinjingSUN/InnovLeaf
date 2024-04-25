@@ -88,22 +88,21 @@ export default {
   },
   methods: {
     saveInterest() {
-      try {
-        const store = useStore();
-        store.$patch({
-          interest: this.interest,
-        });
-      } catch (error) {
-        ElMessage({
-          message: "保存失败",
-          type: "error",
-        });
-      }
-
       axios
         .post("http://127.0.0.1:5000/user", this.interest)
         .then((response) => {
           if (response.status === 200) {
+            try {
+              const store = useStore();
+              store.$patch({
+                interest: this.interest,
+              });
+            } catch (error) {
+              ElMessage({
+                message: "保存失败",
+                type: "error",
+              });
+            }
             ElMessage({
               message: "保存成功",
               type: "success",
