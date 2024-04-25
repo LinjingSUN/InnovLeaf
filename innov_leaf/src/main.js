@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import axios from 'axios'
 
 
 // import store - pinia
@@ -29,6 +30,20 @@ const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
+
+
+app.config.globalProperties.$http = axios
+axios.defaults.baseURL = 'http://127.0.0.1:5000/'
+
+axios.interceptors.request.use(
+  config => {
+    if (sessionStorage.getItem('token')) {
+      config.headers.token = sessionStorage.getItem('token')
+    }
+    return config
+  }
+)
+
 
 import './global.css'
 createApp(App).use(router).use(createPinia()).use(ElementPlus).use(vuetify).mount('#app')
