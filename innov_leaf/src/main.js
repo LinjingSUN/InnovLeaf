@@ -30,5 +30,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
 
+
 import './global.css'
 createApp(App).use(router).use(createPinia()).use(ElementPlus).use(vuetify).mount('#app')

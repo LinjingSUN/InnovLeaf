@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
 # 设置Google Cloud认证文件路径
-credential_path = "E:\\build\innovleaf-001-6b65825ef30c.json"
+credential_path = "C:\\Google\innovleaf-3653321d9e5e.json"
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
 # 初始化数据
@@ -112,8 +112,7 @@ def generatePrompt():
 def generate_story() -> str:
     """Ideation example with a Large Language Model"""
 
-    vertexai.init(project="innovleaf-001", location="us-central1")
-
+    vertexai.init(project="InnovLeaf", location="asia-east2")
     parameters = {
         "temperature": 0.5,  # Temperature controls the degree of randomness in token selection.
         "max_output_tokens": 1024,  # Token limit determines the maximum amount of text output.
@@ -140,5 +139,7 @@ def format_story(story):
     return story_list
 
 if __name__ == '__main__':
+    print(generate_story())
 
     app.run()
+

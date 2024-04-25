@@ -1,7 +1,8 @@
 // src/router.js
-import HelloWorld from '@/components/HelloWorld.vue'
+// import HelloWorld from '@/components/HelloWorld.vue'
 import UserSetting from '@/views/SettingPage.vue'
 import StoryPreview from '@/views/StoryPreviewPage.vue'
+import GeneratePage from '@/views/GeneratePage.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 
@@ -10,7 +11,7 @@ const routes = [
     { 
         path: '/', 
         name: 'index', 
-        component: HelloWorld
+        component: GeneratePage
     }, {
         path: '/setting',
         name: 'UserSetting',
