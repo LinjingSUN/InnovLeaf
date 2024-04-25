@@ -33,7 +33,7 @@
             >
             </el-option>
           </el-select>
-          <el-button type="text" @click="openLan()" class="select-icon">
+          <el-button link @click="openLan()" class="select-icon">
             <el-icon><QuestionFilled /></el-icon>
           </el-button>
         </div>
@@ -118,8 +118,9 @@
 
 <script>
 import {ElMessage} from 'element-plus';
-
+import {useStore} from '@/store/index.js';
 import { QuestionFilled } from "@element-plus/icons-vue";
+import axios from 'axios';
 
 export default {
   components: {
@@ -149,14 +150,41 @@ export default {
     };
   },
 
+   // 在页面渲染之前获取pinia store中的数据
+   created() {
+    const store = useStore();
+    this.basicInfoData = store.$state.basicInfoData;
+  },
+
   methods: {
     submitForm() {
-      // Handle form submission
-      ElMessage({
-        message: "保存成功",
-        type: "success",
-      });
-      console.log(this.basicInfoData);
+      
+      axios
+        .post("http://127.0.0.1:5000/user", this.basicInfoData)
+        .then((response) => {
+          if (response.status === 200) {
+            try {
+              const store = useStore();
+              store.$patch({
+                basicInfoData: this.basicInfoData,
+              });
+            } catch (error) {
+              ElMessage({
+                message: "保存失败",
+                type: "error",
+              });
+            }
+            ElMessage({
+              message: "保存成功",
+              type: "success",
+            });
+          } else {
+            ElMessage({
+              message: "保存失败",
+              type: "error",
+            });
+          }
+        });
     },
     openLan() {
       this.dialogVisible = true;

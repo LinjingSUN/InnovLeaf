@@ -64,6 +64,8 @@
 
 <script>
 import { ElMessage } from "element-plus";
+import { useStore } from "@/store/index.js";
+import axios from "axios";
 
 export default {
   data() {
@@ -78,13 +80,40 @@ export default {
       },
     };
   },
+
+  // 在页面渲染之前获取pinia store中的数据
+  created() {
+    const store = useStore();
+    this.interest = store.$state.interest;
+  },
   methods: {
     saveInterest() {
-      ElMessage({
-        message: "保存成功",
-        type: "success",
-      });
-      console.log(this.interest);
+      axios
+        .post("http://127.0.0.1:5000/user", this.interest)
+        .then((response) => {
+          if (response.status === 200) {
+            try {
+              const store = useStore();
+              store.$patch({
+                interest: this.interest,
+              });
+            } catch (error) {
+              ElMessage({
+                message: "保存失败",
+                type: "error",
+              });
+            }
+            ElMessage({
+              message: "保存成功",
+              type: "success",
+            });
+          } else {
+            ElMessage({
+              message: "保存失败",
+              type: "error",
+            });
+          }
+        });
     },
   },
 };
@@ -92,13 +121,13 @@ export default {
 
 
 <style scoped>
-.interest-setting{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: "Courier New", Courier, monospace;
-    position: relative;
+.interest-setting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Courier New", Courier, monospace;
+  position: relative;
 }
 .header {
   display: flex;
@@ -112,13 +141,12 @@ export default {
 .item {
   margin-bottom: 10px;
   width: 100%;
-
 }
 
-.btn{
-    position: absolute;
-    bottom: -10%;
-    right: 50%;
-    transform: translateX(50%);
+.btn {
+  position: absolute;
+  bottom: -10%;
+  right: 50%;
+  transform: translateX(50%);
 }
 </style>

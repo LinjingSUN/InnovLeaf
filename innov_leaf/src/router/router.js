@@ -19,6 +19,11 @@ const routes = [
         path: '/history',
         name: 'StoryPreview',
         component: StoryPreview
+    },
+    { 
+        path: '/reading', 
+        name: 'Reading',
+        component: () => import('@/views/ReadingPage.vue')
     }
 ]
 
