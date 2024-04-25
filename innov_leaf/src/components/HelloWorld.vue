@@ -23,27 +23,7 @@ export default {
     };
   },
 
-  // created() {
-  //   axios
-  //   .get("http://127.0.0.1:5000/user")
-  //   .then((response) => {
-  //     if(response.data != null) {
-  //     console.log(response.data);
-  //     const data = response.data;
-  //     const store = useStore();
-  //     store.$patch({
-  //       readingData: data.readingData,
-  //       interest: data.interest,
-  //       expectionData: data.expectionData,
-  //       userProfile: data.userProfile,
-  //       basicInfoData: data.basicInfoData,
-  //     });
-  //   }
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-  // },
+
 
   methods: {
     goView() {
